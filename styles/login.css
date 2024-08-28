@@ -1,0 +1,23 @@
+.container-forms{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: max-content;
+}
+.container-login, .container-registar{
+    text-align: center;
+    width: 300px;
+    margin-top:15%;
+}
+
+input[type="text"], input[type="password"], input[type="email"]{
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+label{
+    display: block;
+    margin-bottom: 5px;
+}
