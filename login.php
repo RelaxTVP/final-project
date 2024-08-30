@@ -1,5 +1,14 @@
 <?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 include 'header.php'
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-pt">
@@ -15,7 +24,8 @@ include 'header.php'
 <body>
     <div class="container-forms">
         <div class="container-login">
-            <form action="" method="post">
+            <h2 class="tit-login">Iniciar Sessão</h2>
+            <form action="confs/login-conf.php" method="post">
                 <label for="username">Username</label>
                 <input type="text" name="username" placeholder="Username" id="username" required><br>
                 <label for="password">Password</label>
@@ -25,6 +35,7 @@ include 'header.php'
         </div>
 
         <div class="container-registar">
+            <h2 class="tit-registar">Registar</h2>
             <form action="" method="post">
                 <label for="name">Nome</label>
                 <input type="text" name="name" placeholder="Nome" id="nome" required><br>
