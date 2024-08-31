@@ -5,7 +5,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 include 'header.php';
-
+include 'confs/db.php';
 session_start();
 
 // Verificar se há sessão iniciada
@@ -14,7 +14,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
     $user_id = $_SESSION['user_id'];
     $username = $_SESSION['username'];
 
-    include 'confs/db.php';
+
 
     $sql = "SELECT name from utilizadores WHERE user_id = ?";
     $stmt = $conn->prepare($sql);
@@ -22,6 +22,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
     $stmt->execute();
     $stmt->bind_result($name);
     $stmt->fetch();
+    $stmt->close();
 
     //Exibir mensagem de boas-vindas
 
@@ -40,6 +41,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="styles/index-produtos.css">
     <title>.Store</title>
 </head>
 
@@ -55,6 +57,28 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
         <div class="container-produtos">
             <div class="container-tit">
                 <h2 class="tit-produtos">Produtos</h2>
+            </div>
+            <div class="grelha-produtos">
+                <?php
+                $sql = "SELECT id, nome, stock, preco, imagem FROM produtos";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo '<div class="produto">';
+                        echo '<img src="' . $row['imagem'] . '" alt="' . $row['nome'] . '">';
+                        echo '<h3>' . $row['nome'] . '</h3>';
+                        echo '<div class="detalhes-produto">';
+                        echo '<p>Stock: ' . $row['stock'] . '</p>';
+                        echo '<p>Preço: ' . $row['preco'] . '</p>';
+                        echo '<button>Adicionar ao Carrinho</button>';
+                        echo '</div>';
+                        echo '</div>';
+                    }
+                } else {
+                    '<p>Nenhum produto encontrado</p>';
+                }
+                ?>
             </div>
 
 
