@@ -1,6 +1,35 @@
 <?php
 
-include 'header.php'
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+include 'header.php';
+
+session_start();
+
+// Verificar se há sessão iniciada
+
+if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
+    $user_id = $_SESSION['user_id'];
+    $username = $_SESSION['username'];
+
+    include 'confs/db.php';
+
+    $sql = "SELECT name from utilizadores WHERE user_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $stmt->bind_result($name);
+    $stmt->fetch();
+
+    //Exibir mensagem de boas-vindas
+
+    echo " <h3> Bem-vindo(a), <strong>$name</strong>!</h2>";
+} else {
+    header("Location: login.php");
+    exit;
+}
 
 ?>
 <!DOCTYPE html>

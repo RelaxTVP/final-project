@@ -36,7 +36,7 @@ include 'header.php'
 
         <div class="container-registar">
             <h2 class="tit-registar">Registar</h2>
-            <form action="" method="post">
+            <form action="confs/signup-conf.php" method="post">
                 <label for="name">Nome</label>
                 <input type="text" name="name" placeholder="Nome" id="nome" required><br>
                 <label for="morada">Morada</label>

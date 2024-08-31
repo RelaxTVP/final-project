@@ -29,27 +29,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         error_log('Number of rows: ' . $stmt->num_rows);
 
         if ($stmt->num_rows > 0) {
-            $stmt->bind_result($user_id, $password);
+            $stmt->bind_result($user_id, $hashed_password);
             $stmt->fetch();
 
             // Verificar se a senha corresponde ao hash
+            if (password_verify($password, $hashed_password)) {
+                error_log('Autenticação bem-sucedida para o usuário: ' . $username);
 
-            error_log('Autenticação bem-sucedida para o usuário: ' . $username);
+                // Armazenar informações na sessão
+                $_SESSION['user_id'] = $user_id;
+                $_SESSION['username'] = $username;
 
-            // Armazenar informações na sessão
-            $_SESSION['user_id'] = $user_id;
-            $_SESSION['username'] = $username;
-
-            // Redirecionar o usuário para a página principal (home)
-            header("Location: ../index.php");
-            exit;
+                // Redirecionar o usuário para a página principal (home)
+                header("Location: ../index.php");
+                exit;
+            } else {
+                // Falha na autenticação
+                error_log('Senha incorreta para o usuário: ' . $username);
+                echo "Senha incorreta";
+                header("refresh:1;url=../login.php");
+            }
         } else {
-            // Falha na autenticação
-            error_log('Senha incorreta para o usuário: ' . $username);
+            error_log('Usuário não encontrado: ' . $username);
+            echo "Utilizador não encontrado";
+            header("refresh:1;url=../login.php");
         }
     } else {
-        error_log('Usuário não encontrado: ' . $username);
+        error_log('Falha na preparação da consulta: ' . $conn->error);
+        echo "Erro na consulta do banco de dados";
+        header("refresh:1;url=../login.php");
     }
-} else {
-    error_log('Falha na preparação da consulta: ' . $conn->error);
 }

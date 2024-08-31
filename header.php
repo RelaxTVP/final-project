@@ -26,6 +26,7 @@
                 <div class="navbar-nav ms-auto">
                     <a class="nav-link login" href="../final-project/login.php">Iniciar Sessão / Registar</a>
                     <a class="nav-link cart" href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                    <form action="confs/logout.php" method="post" class="nav-link logout"><button type="submit">Logout</button></form>
                 </div>
             </div>
         </div>
