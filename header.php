@@ -9,7 +9,6 @@
     <script src="https://kit.fontawesome.com/af9ce2ef07.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/header.css">
-    <title>.Store - Homepage</title>
 </head>
 
 <body>
@@ -21,11 +20,11 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link active" aria-current="page" href="#produtos">Produtos</a>
+                    <a class="nav-link active" aria-current="page" href="index.php#produtos">Produtos</a>
                 </div>
                 <div class="navbar-nav ms-auto">
                     <a class="nav-link login" href="../final-project/login.php">Iniciar Sessão / Registar</a>
-                    <a class="nav-link cart" href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                    <a class="nav-link cart" href="../final-project/carrinho.php"><i class="fa-solid fa-cart-shopping"></i></a>
                     <form action="confs/logout.php" method="post" class="nav-link logout"><button type="submit">Logout</button></form>
                 </div>
             </div>

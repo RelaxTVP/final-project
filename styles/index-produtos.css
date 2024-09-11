@@ -2,6 +2,8 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
+    justify-content: center;
+    padding: 20px;
 }
 
 .produto {
@@ -16,8 +18,9 @@
 
 .produto img {
     max-width: 100%;
-    height: auto;
+    height: 200px;
     display: block;
+    text-align: center;
 }
 
 .produto h3 {
@@ -48,7 +51,7 @@
 }
 
 .detalhes-produto button {
-    background-color: #ff5722;
+    background-color: #208b99;
     border: none;
     padding: 10px 20px;
     color: #fff;
@@ -58,5 +61,5 @@
 }
 
 .detalhes-produto button:hover {
-    background-color: #e64a19;
+    background-color: #208b99;
 }

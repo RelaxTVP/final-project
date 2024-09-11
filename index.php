@@ -42,6 +42,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/index.css">
     <link rel="stylesheet" href="styles/index-produtos.css">
+    <title>.Store - Homepage</title>
     <title>.Store</title>
 </head>
 
@@ -66,7 +67,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         echo '<div class="produto">';
-                        echo '<img src="' . $row['imagem'] . '" alt="' . $row['nome'] . '">';
+                        echo '<img src="data:image/png;base64,' . base64_encode($row['imagem']) . '" alt="' . $row['nome'] . '">';
                         echo '<h3>' . $row['nome'] . '</h3>';
                         echo '<div class="detalhes-produto">';
                         echo '<p>Stock: ' . $row['stock'] . '</p>';
