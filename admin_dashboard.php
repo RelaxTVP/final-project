@@ -137,7 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     <div class="form-group">
                         <label for="imagem">URL da Imagem:</label>
-                        <input type="text" id="imagem" name="imagem" required>
+                        <input type="file" id="imagem" name="imagem" required>
                     </div>
 
                     <div class="finalizar-botao">

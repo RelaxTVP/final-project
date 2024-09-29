@@ -44,7 +44,7 @@ th {
     border-radius: 8px; /* Bordas arredondadas */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
     padding: 20px; /* Espaçamento interno */
-    width: 300px; /* Largura do formulário */
+    width: 500px; /* Largura do formulário */
     text-align: center; /* Centraliza o texto dentro do formulário */
 }
 
@@ -55,7 +55,8 @@ label {
 }
 
 input[type="text"],
-input[type="number"] {
+input[type="number"],
+input[type="file"] {
     width: 100%; /* Largura total do campo */
     padding: 10px; /* Espaçamento interno */
     border: 1px solid #ccc; /* Borda padrão */

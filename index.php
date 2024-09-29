@@ -27,9 +27,6 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
     //Exibir mensagem de boas-vindas
 
     echo " <h3> Bem-vindo(a), <strong>$name</strong>!</h2>";
-} else {
-    header("Location: login.php");
-    exit;
 }
 
 ?>
