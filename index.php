@@ -1,12 +1,12 @@
 <?php
-
+session_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 include 'header.php';
 include 'confs/db.php';
-session_start();
+
 
 // Verificar se há sessão iniciada
 
@@ -66,23 +66,31 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
 
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
-                        echo '<div class="produto">';
-                        echo '<img src="data:image/png;base64,' . base64_encode($row['imagem']) . '" alt="' . $row['nome'] . '">';
-                        echo '<h3>' . $row['nome'] . '</h3>';
-                        echo '<div class="detalhes-produto">';
-                        echo '<p>Stock: ' . $row['stock'] . '</p>';
-                        echo '<p>Preço: ' . $row['preco'] . '</p>';
-                        echo '<button>Adicionar ao Carrinho</button>';
-                        echo '</div>';
-                        echo '</div>';
+                ?>
+                        <div class="produto">
+                            <img src="data:image/png;base64,<?php echo base64_encode($row['imagem']); ?>" alt="<?php echo $row['nome']; ?>">
+                            <h3><?php echo $row['nome']; ?></h3>
+                            <div class="detalhes-produto">
+                                <p>Stock: <?php echo $row['stock']; ?></p>
+                                <p>Preço: <?php echo $row['preco']; ?></p>
+
+                                <!-- Formulário para adicionar ao carrinho -->
+                                <form method="post" action="carrinho.php">
+                                    <input type="hidden" name="product_id" value="<?php echo $row['id']; ?>">
+                                    <input type="hidden" name="product_name" value="<?php echo $row['nome']; ?>">
+                                    <input type="hidden" name="product_price" value="<?php echo $row['preco']; ?>">
+                                    <input type="number" name="quantity" value="1" min="1">
+                                    <button type="submit" name="add_to_cart">Adicionar ao Carrinho</button>
+                                </form>
+                            </div>
+                        </div>
+                <?php
                     }
                 } else {
-                    '<p>Nenhum produto encontrado</p>';
+                    echo '<p>Nenhum produto encontrado</p>';
                 }
                 ?>
             </div>
-
-
         </div>
     </section>
 

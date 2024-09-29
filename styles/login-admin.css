@@ -1,0 +1,70 @@
+body {
+    background-color: #f4f4f4; /* Cor de fundo suave */
+
+    height: 100vh; /* Faz com que ocupe toda a altura da tela */
+    margin: 0;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    padding-top: 20%;
+}
+.login-container {
+    
+    background-color: #ffffff; /* Fundo branco para o formulário */
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    padding: 20px; /* Espaçamento interno */
+    width: 300px; /* Largura do formulário */
+    text-align: center; /* Centraliza o texto dentro do formulário */
+}
+
+h2 {
+    margin-bottom: 20px; /* Espaçamento abaixo do título */
+    color: #333; /* Cor do texto */
+}
+
+.form-group {
+    margin-bottom: 15px; /* Espaçamento entre os campos do formulário */
+}
+
+label {
+    display: block; /* Faz com que o label ocupe a linha inteira */
+    margin-bottom: 5px; /* Espaçamento abaixo do label */
+    font-weight: bold; /* Deixa o texto em negrito */
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%; /* Largura total do campo */
+    padding: 10px; /* Espaçamento interno */
+    border: 1px solid #ccc; /* Borda padrão */
+    border-radius: 4px; /* Bordas arredondadas */
+    box-sizing: border-box; /* Inclui o padding na largura total */
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #007BFF; /* Cor da borda ao focar */
+    outline: none; /* Remove a borda padrão do foco */
+}
+
+button {
+    background-color: #007BFF; /* Cor do botão */
+    color: white; /* Cor do texto do botão */
+    padding: 10px; /* Espaçamento interno do botão */
+    border: none; /* Remove borda */
+    border-radius: 4px; /* Bordas arredondadas */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+    width: 100%; /* Largura total do botão */
+}
+
+button:hover {
+    background-color: #0056b3; /* Cor ao passar o mouse */
+}
+
+.error-message {
+    color: red; /* Cor da mensagem de erro */
+    margin-bottom: 15px; /* Espaçamento abaixo da mensagem de erro */
+}

@@ -23,9 +23,15 @@
                     <a class="nav-link active" aria-current="page" href="index.php#produtos">Produtos</a>
                 </div>
                 <div class="navbar-nav ms-auto">
-                    <a class="nav-link login" href="../final-project/login.php">Iniciar Sessão / Registar</a>
+                    <a class="nav-link cart" href="admin.php">Administração</a>
                     <a class="nav-link cart" href="../final-project/carrinho.php"><i class="fa-solid fa-cart-shopping"></i></a>
-                    <form action="confs/logout.php" method="post" class="nav-link logout"><button type="submit">Logout</button></form>
+                    <?php if (!isset($_SESSION['user_id'])): ?>
+                        <a class="nav-link login" href="../final-project/login.php">Iniciar Sessão / Registar</a>
+                    <?php else: ?>
+                        <form action="confs/logout.php" method="post" class="nav-link logout"><button type="submit">Logout</button></form>
+                    <?php endif; ?>
+
+
                 </div>
             </div>
         </div>

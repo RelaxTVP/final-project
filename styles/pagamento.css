@@ -1,0 +1,52 @@
+.pagamento-form h3{
+    text-align: center;
+    margin-top:2%;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.pagamento-form {
+    margin-top: 20px;
+    background-color: #f9f9f9; /* Fundo do formulário */
+    padding: 20px; /* Espaçamento interno */
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra leve */
+}
+
+.form-group {
+    margin-bottom: 15px; /* Espaço entre os campos */
+}
+
+.form-group label {
+    display: block; /* Exibe cada rótulo em uma nova linha */
+    margin-bottom: 5px; /* Espaçamento abaixo do rótulo */
+}
+
+.form-group input {
+    width: 100%; /* Largura total */
+    padding: 10px; /* Espaçamento interno */
+    border: 1px solid #ccc; /* Borda cinza */
+    border-radius: 4px; /* Bordas arredondadas */
+    font-size: 16px; /* Tamanho da fonte */
+}
+
+.pagamento-form button {
+    background-color: #28a745; /* Verde */
+    color: white; /* Texto branco */
+    padding: 10px; /* Espaçamento interno */
+    border: none; /* Sem borda */
+    border-radius: 5px; /* Bordas arredondadas */
+    cursor: pointer; /* Mão ao passar o mouse */
+    font-size: 16px; /* Tamanho da fonte */
+    transition: background-color 0.3s; /* Transição suave */
+
+}
+
+.pagamento-form button:hover {
+    background-color: #218838; /* Verde escuro ao passar o mouse */
+}
+.finalizar-botao {
+    width: 100%;
+    text-align: center;
+}
+
