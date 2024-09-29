@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+include 'confs/db.php';
 include 'header.php';
 
 
@@ -10,7 +10,33 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
     exit;
 }
 
-// Aqui você pode adicionar o código para mostrar as encomendas e produtos
+// Obter todas as encomendas da base de dados
+$sql = "SELECT * FROM encomendas";
+$result = $conn->query($sql);
+
+
+$sql_produtos = "SELECT * FROM produtos";
+$result_produtos = $conn->query($sql_produtos);
+
+// Verificar se o formulário para adicionar produtos foi submetido
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $nome = htmlspecialchars($_POST['nome']);
+    $stock = htmlspecialchars($_POST['stock']);
+    $preco = htmlspecialchars($_POST['preco']);
+    $imagem = htmlspecialchars($_POST['imagem']); // Supondo que o caminho da imagem seja uma string
+
+    // Adicionar novo produto à base de dados
+    $stmt = $conn->prepare("INSERT INTO produtos (nome, stock, preco, imagem) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("sids", $nome, $stock, $preco, $imagem); // "sids" - string, integer, double, string
+
+    if ($stmt->execute()) {
+        echo "<div class='mensagem-sucesso'>Produto adicionado com sucesso!</div>";
+    } else {
+        echo "<div class='mensagem-erro'>Erro ao adicionar produto: " . $stmt->error . "</div>";
+    }
+
+    $stmt->close();
+}
 ?>
 
 <!DOCTYPE html>
@@ -21,15 +47,114 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel de Administração</title>
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/admin-dashboard.css">
 </head>
 
 <body>
-    <h2>Painel de Administração</h2>
-    <h3>Encomendas</h3>
-    <!-- Código para exibir a lista de encomendas -->
 
-    <h3>Produtos</h3>
-    <!-- Código para exibir a lista de produtos -->
+    <h2>Painel de Administração</h2>
+    <div class="admin-container">
+
+        <h3>Encomendas</h3>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nome do Cliente</th>
+                <th>Data de Nascimento</th>
+                <th>Morada</th>
+                <th>ID do Produto</th>
+                <th>Quantidade</th>
+                <th>Preço Total</th>
+
+            </tr>
+            <?php
+            if ($result->num_rows > 0) {
+                // Saída de dados de cada linha
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td>" . htmlspecialchars($row['id']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['nome_cliente']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['data_nascimento']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['morada']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['produto_id']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['quantidade']) . "</td>";
+                    echo "<td>" . number_format($row['preco_total'], 2) . "€</td>";
+                    echo "</tr>";
+                }
+            } else {
+                echo "<tr><td colspan='8'>Nenhuma encomenda encontrada.</td></tr>";
+            }
+            ?>
+        </table>
+    </div>
+    <div class="admin-container">
+        <h3>Produtos</h3>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Stock</th>
+                <th>Preço</th>
+                <th>Imagem</th>
+            </tr>
+            <?php
+            if ($result_produtos->num_rows > 0) {
+                // Saída de dados de cada linha
+                while ($row = $result_produtos->fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td>" . htmlspecialchars($row['id']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['nome']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['stock']) . "</td>";
+                    echo "<td>" . number_format($row['preco'], 2) . "€</td>";
+                    echo "<td><img src='" . htmlspecialchars($row['imagem']) . "' alt='" . htmlspecialchars($row['nome']) . "' style='width: 50px;'></td>";
+                    echo "</tr>";
+                }
+            } else {
+                echo "<tr><td colspan='5'>Nenhum produto encontrado.</td></tr>";
+            }
+            ?>
+        </table>
+        <br><br>
+        <h3>Adicionar Novo Produto</h3>
+        <div class="container">
+            <div class="add-container">
+                <form method="post" action="">
+
+                    <div class="form-group">
+                        <label for="nome">Nome do Produto:</label>
+                        <input type="text" id="nome" name="nome" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stock">Quantidade em Stock:</label>
+                        <input type="number" id="stock" name="stock" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="preco">Preço:</label>
+                        <input type="text" id="preco" name="preco" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="imagem">URL da Imagem:</label>
+                        <input type="text" id="imagem" name="imagem" required>
+                    </div>
+
+                    <div class="finalizar-botao">
+                        <button type="submit">Adicionar Produto</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    </div>
+    <div class="admin-acoes">
+        <a href="logout.php">Sair</a>
+    </div>
 </body>
 
 </html>
+<?php
+$conn->close(); // Fechar a conexão
+?>
