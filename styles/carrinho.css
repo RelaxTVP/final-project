@@ -1,4 +1,4 @@
-/* Centralizar o body */
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f5f5f5;
@@ -7,7 +7,7 @@ body {
     height: 100vh;
 }
 
-/* Centralizar o conteúdo do carrinho */
+
 .carrinho-container {
     width: 100%;
     max-width: 100%;
@@ -21,7 +21,7 @@ body {
     align-items: center;
 }
 
-/* Título */
+
 .tit-carrinho h2 {
     text-align: center;
     margin-top:2%;
@@ -29,7 +29,7 @@ body {
     font-size: 24px;
 }
 
-/* Estilização da tabela de produtos */
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -51,7 +51,7 @@ table td {
     font-size: 16px;
 }
 
-/* Link de remover */
+
 a {
     color: #ff4d4d;
     text-decoration: none;
@@ -61,20 +61,20 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Total geral */
+
 .total-geral {
     text-align: right;
     font-size: 18px;
     font-weight: bold;
 }
 
-/* Ações do carrinho */
+
 .carrinho-acoes {
     text-align: center;
     margin-top: 20px;
 }
 
-/* Botão continuar compras */
+
 .continuar-compras {
     display: inline-block;
     padding: 10px 20px;

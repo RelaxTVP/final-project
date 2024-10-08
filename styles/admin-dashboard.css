@@ -40,42 +40,42 @@ th {
 }
 
 .add-container{
-    background-color: #ffffff; /* Fundo branco para o formulário */
-    border-radius: 8px; /* Bordas arredondadas */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    padding: 20px; /* Espaçamento interno */
-    width: 500px; /* Largura do formulário */
-    text-align: center; /* Centraliza o texto dentro do formulário */
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 500px;
+    text-align: center;
 }
 
 label {
-    display: block; /* Faz com que o label ocupe a linha inteira */
-    margin-bottom: 5px; /* Espaçamento abaixo do label */
-    font-weight: bold; /* Deixa o texto em negrito */
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
 input[type="text"],
 input[type="number"],
 input[type="file"] {
-    width: 100%; /* Largura total do campo */
-    padding: 10px; /* Espaçamento interno */
-    border: 1px solid #ccc; /* Borda padrão */
-    border-radius: 4px; /* Bordas arredondadas */
-    box-sizing: border-box; /* Inclui o padding na largura total */
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 .finalizar-botao button {
-    background-color: #007BFF; /* Cor do botão */
+    background-color: #007BFF;
     color: white;
-    margin-top: 10px; /* Cor do texto do botão */
-    padding: 10px; /* Espaçamento interno do botão */
-    border: none; /* Remove borda */
-    border-radius: 4px; /* Bordas arredondadas */
-    cursor: pointer; /* Muda o cursor para indicar que é clicável */
-    width: 100%; /* Largura total do botão */
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
 }
 
 .finalizar-botao button:hover {
-    background-color: #0056b3; /* Cor ao passar o mouse */
+    background-color: #0056b3;
 }
 

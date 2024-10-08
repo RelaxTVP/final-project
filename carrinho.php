@@ -56,7 +56,7 @@ if (isset($_POST['add_to_cart'])) {
         $_SESSION['cart'] = array($cart_item);
     }
 
-    // Atualizar o estoque
+    // Atualizar o stock
     $sql = "UPDATE produtos SET stock = stock - ? WHERE id = ? AND stock >= ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("iii", $quantity, $product_id, $quantity);

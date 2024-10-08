@@ -4,6 +4,7 @@
     align-items: center;
     width: 100%;
     height: max-content;
+    padding-bottom: 10%;
 }
 .container-login, .container-registar{
     text-align: center;
@@ -25,4 +26,17 @@ input[type="text"], input[type="password"], input[type="email"]{
 label{
     display: block;
     margin-bottom: 5px;
+}
+
+input[type="submit"]{
+    background-color: #007BFF;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+input[type="submit"]:hover{
+    background-color: #0056b3;
 }

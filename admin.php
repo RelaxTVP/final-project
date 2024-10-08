@@ -9,8 +9,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
 
     // Consultar o utilizador na tabela
-    $sql = "SELECT * FROM utilizadores WHERE username = 'admin'";
+    $sql = "SELECT * FROM utilizadores WHERE username = ?";
     $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $username); // Bind do username para evitar SQL Injection
     $stmt->execute();
     $result = $stmt->get_result();
 
@@ -20,9 +21,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Verificar a senha
         if (password_verify($password, $user['password'])) {
-            $_SESSION['admin_logged_in'] = true; // Sinaliza que o admin está logado
-            header("Location: admin_dashboard.php"); // Redireciona para o painel de administração
-            exit;
+            // Verificar o tipo de utilizador
+            if ($user['user_type'] === 'admin') {
+                $_SESSION['admin_logged_in'] = true;
+                $_SESSION['username'] = $username;
+                $_SESSION['user_type'] = 'admin';
+                header("Location: admin_dashboard.php");
+                exit;
+            } elseif ($user['user_type'] === 'user') {
+                $_SESSION['user_logged_in'] = true;
+                $_SESSION['username'] = $username;
+                $_SESSION['user_type'] = 'user';
+                echo 'Não tem permissão para aceder a esta página';
+                header("refresh:2;url=index.php");
+                exit;
+            }
         } else {
             $error_message = "Nome de utilizador ou palavra-passe incorretos.";
         }

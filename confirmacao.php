@@ -16,21 +16,30 @@ if ($transacao_concluida) {
     $pais = htmlspecialchars($_POST['pais']);
     $total_geral = 0;
 
-    // Inserir cada item do carrinho na tabela "encomendas"
-    foreach ($_SESSION['cart'] as $item) {
-        $produto_id = $item['id'];
-        $quantidade = $item['quantity'];
-        $preco_total = $item['quantity'] * $item['price'];
-        $total_geral += $preco_total;
+    // Verificar se o carrinho não está vazio
+    if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+        // Inserir cada item do carrinho na tabela "encomendas"
+        foreach ($_SESSION['cart'] as $item) {
+            $produto_id = $item['id'];
+            $quantidade = $item['quantity']; // Verifique se a chave é 'quantity'
+            $preco_total = $quantidade * $item['price']; // Corrigi para usar a variável 'quantidade'
+            $total_geral += $preco_total;
 
-        // Prepare a consulta SQL
-        $sql = "INSERT INTO encomendas (nome_cliente, data_nascimento, morada, produto_id, quantidade, preco_total) VALUES (?, ?, ?, ?, ?, ?)";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssssss", $nome_cliente, $data_nascimento, $endereco, $produto_id, $quantidade, $preco_total);
-        $stmt->execute();
+            // Prepare a consulta SQL
+            $sql = "INSERT INTO encomendas (nome_cliente, data_nascimento, morada, produto_id, quantidade, preco_total) VALUES (?, ?, ?, ?, ?, ?)";
+            $stmt = $conn->prepare($sql);
+            if ($stmt === false) {
+                die("Erro na preparação da consulta: " . $conn->error);
+            }
+            $stmt->bind_param("sssiii", $nome_cliente, $data_nascimento, $endereco, $produto_id, $quantidade, $preco_total);
+            if (!$stmt->execute()) {
+                echo "Erro ao inserir dados: " . $stmt->error; // Mensagem de erro
+            }
+        }
+    } else {
+        echo "O carrinho está vazio."; // Mensagem de erro
     }
 }
-
 ?>
 
 <!DOCTYPE html>

@@ -119,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <!-- Formulário de Informações Pessoais e Pagamento -->
         <div class="pagamento-form">
             <h3>Informações Pessoais e de Pagamento</h3>
-            <form method="post" action="">
+            <form method="post" action="confirmacao.php">
 
                 <!-- Informações Pessoais -->
                 <div class="form-group">

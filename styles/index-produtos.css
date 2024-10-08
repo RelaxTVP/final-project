@@ -51,7 +51,7 @@
 }
 
 .detalhes-produto button {
-    background-color: #208b99;
+    background-color: #007BFF;
     border: none;
     padding: 10px 20px;
     color: #fff;
@@ -61,5 +61,5 @@
 }
 
 .detalhes-produto button:hover {
-    background-color: #208b99;
+    background-color: #0056b3;
 }

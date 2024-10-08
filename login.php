@@ -30,7 +30,7 @@ include 'header.php'
                 <input type="text" name="username" placeholder="Username" id="username" required><br>
                 <label for="password">Password</label>
                 <input type="password" name="password" placeholder="Password" id="password" required><br>
-                <input type="submit" name="submit-btn" placeholder="Iniciar Sessão" id="submit-btn">
+                <input type="submit" name="submit-btn" value="Iniciar Sessão" id="submit-btn">
             </form>
         </div>
 
@@ -47,7 +47,7 @@ include 'header.php'
                 <input type="email" name="email" placeholder="Email" id="email" required><br>
                 <label for="password">Password</label>
                 <input type="password" name="password" placeholder="Password" id="password" required><br>
-                <input type="submit" name="submit-btn" placeholder="Registar" id="submit-btn">
+                <input type="submit" name="submit-btn" value="Registar" id="submit-btn">
 
             </form>
         </div>
