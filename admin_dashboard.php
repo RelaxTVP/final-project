@@ -28,6 +28,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_product'])) {
     $stmt->close();
 }
 
+// Verificar se o formulário para adicionar produtos foi submetido
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_product'])) {
+    $nome = htmlspecialchars($_POST['nome']);
+    $stock = htmlspecialchars($_POST['stock']);
+    $preco = htmlspecialchars($_POST['preco']);
+    $imagem = htmlspecialchars($_POST['imagem']); // Supondo que o caminho da imagem seja uma string
+
+    // Adicionar novo produto à base de dados
+    $stmt = $conn->prepare("INSERT INTO produtos (nome, stock, preco, imagem) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("sids", $nome, $stock, $preco, $imagem); // "sids" - string, integer, double, string
+
+    if ($stmt->execute()) {
+        echo "<div class='mensagem-sucesso'>Produto adicionado com sucesso!</div>";
+    } else {
+        echo "<div class='mensagem-erro'>Erro ao adicionar produto: " . $stmt->error . "</div>";
+    }
+
+    $stmt->close();
+}
+
 // Verificar se o formulário de exclusão de encomenda foi submetido
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_order'])) {
     $encomenda_id = htmlspecialchars($_POST['encomenda_id']);
@@ -132,7 +152,7 @@ $result_produtos = $conn->query($sql_produtos);
                     echo "<td>" . htmlspecialchars($row['nome']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['stock']) . "</td>";
                     echo "<td>" . number_format($row['preco'], 2) . "€</td>";
-                    echo "<td><img src='" . htmlspecialchars($row['imagem']) . "' alt='" . htmlspecialchars($row['nome']) . "' style='width: 50px;'></td>";
+                    echo "<td><img src='data:image/png;base64," . base64_encode($row['imagem']) . "' alt='" . htmlspecialchars($row['nome']) . "' style='max-width: 100px; max-height:100px;'></td>";
                     echo "<td>";
                     echo "<form method='post' action=''>";
                     echo "<input type='hidden' name='produto_id' value='" . htmlspecialchars($row['id']) . "'>";
@@ -152,7 +172,7 @@ $result_produtos = $conn->query($sql_produtos);
 
     <div class="admin-container">
         <h3>Adicionar Novo Produto</h3>
-        <form method="post" action="">
+        <form method="post" action="" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="nome">Nome do Produto:</label>
                 <input type="text" id="nome" name="nome" required>
@@ -167,9 +187,9 @@ $result_produtos = $conn->query($sql_produtos);
             </div>
             <div class="form-group">
                 <label for="imagem">URL da Imagem:</label>
-                <input type="text" id="imagem" name="imagem" required>
+                <input type="file" id="imagem" name="imagem" required>
             </div>
-            <button type="submit">Adicionar Produto</button>
+            <button type="submit" name="add_product">Adicionar Produto</button>
         </form>
     </div>
 
